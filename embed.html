@@ -106,6 +106,40 @@
                     <div id="modal-body"></div>
                 </div>
             </div>
+            <button class="chat-toggle" id="chatToggle" aria-label="Åpne chat">
+                <svg class="chat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                </svg>
+                <svg class="close-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="18" y1="6" x2="6" y2="18"/>
+                    <line x1="6" y1="6" x2="18" y2="18"/>
+                </svg>
+            </button>
+            <div class="chat-widget" id="chatWidget">
+                <div class="chat-widget-header">
+                    <div class="avatar">🎓</div>
+                    <div class="header-text">
+                        <h3>Fagvalg-assistent</h3>
+                        <p>Bergen Private Gymnas</p>
+                    </div>
+                </div>
+                <div class="chat-widget-messages" id="chatMessages">
+                    <div class="chat-message bot">
+                        Hei! Jeg kan hjelpe deg med spørsmål om programfag på BPG.
+                    </div>
+                </div>
+                <div class="chat-widget-notice">
+                    ⚠️ Dummy-widget - Vil bli erstattet med ekte chatbot
+                </div>
+                <form class="chat-widget-input" id="chatForm">
+                    <input type="text" id="chatInput" placeholder="Skriv et spørsmål..." autocomplete="off">
+                    <button type="submit" aria-label="Send">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+                        </svg>
+                    </button>
+                </form>
+            </div>
         `;
 
         // Last app.js

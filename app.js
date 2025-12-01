@@ -313,3 +313,78 @@ document.addEventListener('keydown', (e) => {
 
 // Init
 loadFag();
+
+// ============================================
+// CHATBOT WIDGET (Dummy)
+// ============================================
+
+const chatToggle = document.getElementById('chatToggle');
+const chatWidget = document.getElementById('chatWidget');
+const chatForm = document.getElementById('chatForm');
+const chatInput = document.getElementById('chatInput');
+const chatMessages = document.getElementById('chatMessages');
+
+// Dummy responses
+const dummyResponses = [
+    "Dette er en dummy-widget. Den ekte chatboten vil bli lastet fra et separat repo.",
+    "Jeg kan dessverre ikke svare ennå - jeg er bare en placeholder!",
+    "Når den ekte boten er klar, vil du kunne spørre om fag, fordypningskrav og mer.",
+    "Takk for at du tester! Den virkelige fagvalg-assistenten kommer snart.",
+    "Visste du at BPG har over 30 programfag å velge mellom? Den ekte boten kan fortelle deg mer!"
+];
+
+// Toggle chat widget
+chatToggle?.addEventListener('click', () => {
+    chatToggle.classList.toggle('open');
+    chatWidget.classList.toggle('open');
+    if (chatWidget.classList.contains('open')) {
+        chatInput?.focus();
+    }
+});
+
+// Handle chat form submit
+chatForm?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const message = chatInput.value.trim();
+    if (!message) return;
+
+    // Add user message
+    addChatMessage(message, true);
+    chatInput.value = '';
+
+    // Show typing indicator
+    showTypingIndicator();
+
+    // Simulate response delay
+    setTimeout(() => {
+        hideTypingIndicator();
+        const response = dummyResponses[Math.floor(Math.random() * dummyResponses.length)];
+        addChatMessage(response, false);
+    }, 1000 + Math.random() * 1000);
+});
+
+function addChatMessage(content, isUser) {
+    const messageDiv = document.createElement('div');
+    messageDiv.className = `chat-message ${isUser ? 'user' : 'bot'}`;
+    messageDiv.textContent = content;
+    chatMessages.appendChild(messageDiv);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+}
+
+function showTypingIndicator() {
+    const typingDiv = document.createElement('div');
+    typingDiv.className = 'chat-message bot typing';
+    typingDiv.id = 'chatTyping';
+    typingDiv.innerHTML = `
+        <span class="typing-dot"></span>
+        <span class="typing-dot"></span>
+        <span class="typing-dot"></span>
+    `;
+    chatMessages.appendChild(typingDiv);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+}
+
+function hideTypingIndicator() {
+    const typing = document.getElementById('chatTyping');
+    if (typing) typing.remove();
+}
