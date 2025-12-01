@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="nb">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fagkatalog - Bergen Private Gymnas</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Fagkatalog</h1>
+        <p class="subtitle">Utforsk programfagene ved Bergen Private Gymnas</p>
+    </header>
+
+    <main>
+        <div class="filters">
+            <div class="filters-row">
+                <input type="text" id="search" placeholder="Søk etter fag...">
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-category="all">Alle</button>
+                    <button class="filter-btn" data-category="realfag">Realfag</button>
+                    <button class="filter-btn" data-category="spraak">Språk</button>
+                    <button class="filter-btn" data-category="samfunnsfag">Samfunnsfag</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="fag-grid" class="fag-grid">
+            <p class="loading">Laster fag...</p>
+        </div>
+    </main>
+
+    <div id="modal" class="modal hidden">
+        <div class="modal-content">
+            <button class="close-btn" aria-label="Lukk">&times;</button>
+            <div id="modal-body"></div>
+        </div>
+    </div>
+
+    <footer>
+        <p>Data fra <a href="https://github.com/fredeids-metis/school-data">school-data API</a></p>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>

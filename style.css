@@ -1,0 +1,699 @@
+/**
+ * Fagkatalog - BPG Style
+ * Matches studieplanlegger modal/catalog design
+ */
+
+/* === CSS Variables (from studieplanlegger base.css) === */
+:root {
+  --primary-color: #1F4739;
+  --primary-hover: #163529;
+  --secondary-color: #E8F5A3;
+  --text-dark: #000000;
+  --text-medium: #737373;
+  --text-light: #666666;
+  --border-light: #e7e7e7;
+  --background-light: #FAFAFA;
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 2px 8px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 8px 20px rgba(31, 71, 57, 0.15);
+  --font-family: helvetica, arial, sans-serif;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+  --transition-fast: 0.2s ease;
+  --transition-normal: 0.3s ease;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-family);
+  background: #f8f9fa;
+  color: var(--text-dark);
+  line-height: 1.6;
+}
+
+/* === HEADER === */
+header {
+  background: linear-gradient(135deg, var(--primary-color) 0%, #2a5a4a 100%);
+  color: white;
+  padding: var(--spacing-xl);
+  text-align: center;
+}
+
+header h1 {
+  font-size: 2rem;
+  margin-bottom: var(--spacing-sm);
+  font-weight: 700;
+}
+
+.subtitle {
+  opacity: 0.9;
+  font-size: 1.1rem;
+}
+
+/* === MAIN CONTENT === */
+main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--spacing-xl);
+}
+
+/* === SEARCH & FILTERS (matches .sp-catalog-*) === */
+.filters {
+  background: white;
+  padding: var(--spacing-md);
+  border-radius: var(--radius-md);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+  margin-bottom: var(--spacing-lg);
+}
+
+.filters-row {
+  display: flex;
+  gap: var(--spacing-md);
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+#search {
+  flex: 1;
+  min-width: 200px;
+  padding: 14px 18px;
+  font-size: 1rem;
+  border: 2px solid #e0e0e0;
+  border-radius: var(--radius-md);
+  transition: all var(--transition-fast);
+  background: #fafafa;
+  font-family: var(--font-family);
+}
+
+#search::placeholder {
+  color: #999;
+  font-weight: 400;
+}
+
+#search:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(31, 71, 57, 0.1);
+  background: white;
+}
+
+/* Filter buttons container */
+.filter-buttons {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.filter-btn {
+  padding: 8px 18px;
+  border: 1px solid #e0e0e0;
+  background: white;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  color: #5a5a5a;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+  font-family: var(--font-family);
+}
+
+.filter-btn:hover {
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+  background: rgba(31, 71, 57, 0.04);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+  transform: translateY(-1px);
+}
+
+.filter-btn.active {
+  background: var(--primary-color);
+  border-color: var(--primary-color);
+  color: white;
+  box-shadow: 0 2px 6px rgba(31, 71, 57, 0.25);
+  font-weight: 600;
+}
+
+/* === FAG GRID (matches .sp-catalog-grid) === */
+.fag-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: var(--spacing-md);
+}
+
+/* === FAG CARD (matches .sp-catalog-card) === */
+.fag-card {
+  background: white;
+  border: 1px solid #e0e0e0;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.fag-card:hover {
+  border-color: var(--primary-color);
+  box-shadow: 0 4px 16px rgba(31, 71, 57, 0.15), 0 2px 8px rgba(31, 71, 57, 0.08);
+  transform: translateY(-4px);
+}
+
+.fag-card:focus,
+.fag-card:focus-visible {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(31, 71, 57, 0.15), 0 4px 12px rgba(31, 71, 57, 0.15);
+}
+
+/* Card image */
+.fag-card-image {
+  height: 120px;
+  overflow: hidden;
+  background: linear-gradient(135deg, #2a5a4a 0%, #4a7a6a 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.fag-card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  animation: fadeIn 0.3s ease forwards;
+}
+
+@keyframes fadeIn {
+  to { opacity: 1; }
+}
+
+.fag-card-image span {
+  font-size: 2.8rem;
+  font-weight: 700;
+  color: white;
+  opacity: 0.9;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Card content */
+.fag-card-content {
+  padding: 14px;
+  background: white;
+}
+
+.fag-card h2 {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-dark);
+  margin: 0 0 8px 0;
+  line-height: 1.4;
+}
+
+.fag-card .fagkode {
+  display: inline-block;
+  background: var(--secondary-color);
+  color: var(--primary-color);
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 0.75rem;
+  font-family: monospace;
+  margin-bottom: 8px;
+}
+
+.fag-card .description {
+  font-size: 0.85rem;
+  color: #5a5a5a;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  line-height: 1.5;
+}
+
+.fag-card .category-tag {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.fag-card .category-tag.realfag {
+  background: rgba(33, 150, 243, 0.15);
+  color: #1976D2;
+}
+
+.fag-card .category-tag.sprak {
+  background: rgba(233, 30, 99, 0.15);
+  color: #C2185B;
+}
+
+.fag-card .category-tag.samfunnsfag {
+  background: rgba(255, 152, 0, 0.15);
+  color: #F57C00;
+}
+
+.fag-card .category-tag.annet {
+  background: rgba(96, 125, 139, 0.15);
+  color: #546E7A;
+}
+
+.loading {
+  text-align: center;
+  padding: var(--spacing-xl);
+  color: #5a5a5a;
+}
+
+/* === MODAL (matches studieplanlegger modal.css) === */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 10000;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 40px 20px 20px 20px;
+  overflow-y: auto;
+}
+
+.modal:not(.hidden) {
+  display: flex;
+}
+
+.modal-content {
+  background: white;
+  border-radius: var(--radius-xl);
+  padding: 40px;
+  max-width: 800px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  position: relative;
+  animation: modalSlideIn 0.3s ease;
+  box-shadow: 0 10px 40px rgba(31, 71, 57, 0.2);
+  border: 2px solid var(--secondary-color);
+}
+
+@keyframes modalSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.close-btn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: rgba(255, 255, 255, 0.9);
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  color: #999;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all var(--transition-normal);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  z-index: 10;
+}
+
+.close-btn:hover {
+  background: rgba(240, 240, 240, 0.95);
+  color: #333;
+}
+
+/* === MODAL HERO SECTION === */
+.modal-hero {
+  position: relative;
+  width: calc(100% + 80px);
+  margin: -40px -40px 24px -40px;
+  height: 200px;
+  overflow: hidden;
+  border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+}
+
+.modal-hero-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 30%;
+}
+
+.modal-hero-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 70%;
+  background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.5) 50%, transparent 100%);
+  pointer-events: none;
+}
+
+.modal-hero-content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 20px 30px;
+  z-index: 2;
+}
+
+.modal-hero-content h2 {
+  margin: 0 0 10px 0;
+  font-size: 1.8rem;
+  color: white;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.4);
+  font-weight: 700;
+}
+
+.modal-hero-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+
+.modal-hero-content .fagkode-badge {
+  background: rgba(232, 245, 163, 0.95);
+  color: var(--primary-color);
+  padding: 6px 14px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  display: inline-block;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  font-family: monospace;
+}
+
+.modal-hero-content .related-badge {
+  background: rgba(255, 255, 255, 0.9);
+  color: var(--primary-color);
+  padding: 6px 14px;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  display: inline-block;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+
+/* Hero fallback (no image) */
+.modal-hero.no-image {
+  height: auto;
+  background: linear-gradient(135deg, var(--primary-color) 0%, #2a5a4a 100%);
+  padding: 30px;
+}
+
+.modal-hero.no-image .modal-hero-content {
+  position: static;
+  padding: 0;
+}
+
+.modal-hero.no-image .modal-hero-content h2 {
+  color: white;
+  text-shadow: none;
+}
+
+/* === MODAL BODY === */
+.modal-body {
+  margin-top: 20px;
+  width: 100%;
+}
+
+.modal-body .om-faget {
+  margin-bottom: 30px;
+}
+
+.modal-body .om-faget h2 {
+  font-size: 1.3rem;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.modal-body .om-faget p {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: #555;
+}
+
+/* === ACCORDION STYLES (matches studieplanlegger) === */
+.fag-accordions {
+  margin: 30px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.fag-accordion {
+  border-radius: 12px;
+  overflow: hidden;
+  background: rgba(232, 245, 163, 0.15);
+  border: 2px solid var(--secondary-color);
+  transition: all 0.3s ease;
+}
+
+.fag-accordion .accordion-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  background: rgba(232, 245, 163, 0.3);
+  cursor: pointer;
+  transition: background 0.3s ease;
+  user-select: none;
+}
+
+.fag-accordion .accordion-header:hover {
+  background: rgba(232, 245, 163, 0.5);
+}
+
+.fag-accordion .accordion-header h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--primary-color);
+  margin: 0;
+  border: none;
+  padding: 0;
+}
+
+.fag-accordion .accordion-count {
+  font-weight: 400;
+  color: #666;
+  margin-left: 8px;
+}
+
+.fag-accordion .accordion-icon {
+  font-size: 1rem;
+  color: var(--primary-color);
+  transition: transform 0.3s ease;
+  font-weight: bold;
+}
+
+.fag-accordion .accordion-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease, padding 0.3s ease;
+  background: rgba(232, 245, 163, 0.08);
+  padding: 0 20px;
+}
+
+.fag-accordion .accordion-content p {
+  margin: 0;
+  line-height: 1.7;
+  color: #555;
+}
+
+.fag-accordion .accordion-content .placeholder-text {
+  color: #999;
+  font-style: italic;
+}
+
+/* Accordion open state */
+.fag-accordion.open .accordion-header {
+  background: var(--secondary-color);
+}
+
+.fag-accordion.open .accordion-icon {
+  transform: rotate(180deg);
+}
+
+.fag-accordion.open .accordion-content {
+  max-height: 2000px;
+  padding: 20px;
+}
+
+/* Kjerneelementer inside accordion */
+.fag-accordion .kjerneelement {
+  background: white;
+  border-left: 3px solid var(--primary-color);
+  padding: var(--spacing-md);
+  margin-bottom: var(--spacing-md);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+}
+
+.fag-accordion .kjerneelement:last-child {
+  margin-bottom: 0;
+}
+
+.fag-accordion .kjerneelement h4 {
+  font-size: 1rem;
+  margin: 0 0 var(--spacing-sm) 0;
+  color: var(--primary-color);
+}
+
+.fag-accordion .kjerneelement p {
+  font-size: 0.95rem;
+  color: #555;
+  margin: 0;
+  line-height: 1.6;
+}
+
+/* === LAREPLAN BUTTON === */
+.btn-lareplan {
+  display: inline-block;
+  margin-top: 30px;
+  padding: 14px 28px;
+  background: var(--primary-color);
+  color: white;
+  text-decoration: none;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  transition: all var(--transition-normal);
+  box-shadow: 0 3px 8px rgba(31, 71, 57, 0.3);
+}
+
+.btn-lareplan:hover {
+  background: var(--primary-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(31, 71, 57, 0.4);
+  color: white;
+  text-decoration: none;
+}
+
+/* === FOOTER === */
+footer {
+  text-align: center;
+  padding: var(--spacing-xl);
+  color: #5a5a5a;
+  font-size: 0.9rem;
+}
+
+footer a {
+  color: var(--primary-color);
+  text-decoration: none;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 768px) {
+  header {
+    padding: var(--spacing-lg) var(--spacing-md);
+  }
+
+  header h1 {
+    font-size: 1.5rem;
+  }
+
+  main {
+    padding: var(--spacing-md);
+  }
+
+  .modal-content {
+    padding: 30px 20px;
+  }
+
+  #modal-body h2 {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .fag-grid {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  }
+
+  .fag-card-image {
+    height: 80px;
+  }
+
+  .filters-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  #search {
+    width: 100%;
+  }
+
+  .filter-buttons {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .modal {
+    padding: 0;
+    align-items: stretch;
+  }
+
+  .modal-content {
+    padding: max(60px, env(safe-area-inset-top, 60px))
+             max(20px, env(safe-area-inset-right, 20px))
+             max(20px, env(safe-area-inset-bottom, 20px))
+             max(20px, env(safe-area-inset-left, 20px));
+    margin: 0;
+    width: 100%;
+    max-width: 100%;
+    max-height: 100vh;
+    height: 100%;
+    border-radius: 0;
+    border: none;
+  }
+
+  #modal-body h2 {
+    font-size: 1.4rem;
+    padding-right: 30px;
+  }
+
+  .close-btn {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+  }
+}
