@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="nb">
+<head>
+    <meta charset="UTF-8">
+    <title>Fagkatalog Embed Test</title>
+    <style>
+        body { font-family: system-ui, sans-serif; padding: 20px; }
+        h1 { margin-bottom: 10px; }
+        .embed-code { background: #f5f5f5; padding: 15px; border-radius: 8px; margin: 20px 0; }
+        .embed-code pre { white-space: pre-wrap; font-size: 12px; }
+    </style>
+</head>
+<body>
+    <h1>Fagkatalog - Innbyggingskode</h1>
+    <p>Kopier koden under og lim inn i en "Code Block" på Squarespace:</p>
+
+    <div class="embed-code">
+        <pre>&lt;!-- Fagkatalog Container --&gt;
+&lt;div id="fagkatalog"&gt;&lt;/div&gt;
+
+&lt;!-- Fagkatalog Loader --&gt;
+&lt;script&gt;
+(function() {
+    const v = Date.now();
+    const base = 'https://fredeids-metis.github.io/fagkatalog-bpg';
+
+    // Last CSS
+    const link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = base + '/style.css?v=' + v;
+    document.head.appendChild(link);
+
+    // Bygg HTML-struktur
+    document.getElementById('fagkatalog').innerHTML = `
+        &lt;main&gt;
+            &lt;div class="filters"&gt;
+                &lt;div class="filters-row"&gt;
+                    &lt;input type="text" id="search" placeholder="Søk etter fag..."&gt;
+                    &lt;div class="filter-buttons"&gt;
+                        &lt;button class="filter-btn active" data-category="all"&gt;Alle&lt;/button&gt;
+                        &lt;button class="filter-btn" data-category="realfag"&gt;Realfag&lt;/button&gt;
+                        &lt;button class="filter-btn" data-category="spraak"&gt;Språk&lt;/button&gt;
+                        &lt;button class="filter-btn" data-category="samfunnsfag"&gt;Samfunnsfag&lt;/button&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+            &lt;div id="fag-grid" class="fag-grid"&gt;
+                &lt;p class="loading"&gt;Laster fag...&lt;/p&gt;
+            &lt;/div&gt;
+        &lt;/main&gt;
+        &lt;div id="modal" class="modal hidden"&gt;
+            &lt;div class="modal-content"&gt;
+                &lt;button class="close-btn" aria-label="Lukk"&gt;&amp;times;&lt;/button&gt;
+                &lt;div id="modal-body"&gt;&lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    `;
+
+    // Last app.js
+    const script = document.createElement('script');
+    script.src = base + '/app.js?v=' + v;
+    document.body.appendChild(script);
+})();
+&lt;/script&gt;</pre>
+    </div>
+
+    <hr>
+    <h2>Live Demo:</h2>
+
+    <!-- Fagkatalog Container -->
+    <div id="fagkatalog"></div>
+
+    <!-- Fagkatalog Loader -->
+    <script>
+    (function() {
+        const v = Date.now();
+        const base = 'https://fredeids-metis.github.io/fagkatalog-bpg';
+
+        // Last CSS
+        const link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.href = base + '/style.css?v=' + v;
+        document.head.appendChild(link);
+
+        // Bygg HTML-struktur
+        document.getElementById('fagkatalog').innerHTML = `
+            <main>
+                <div class="filters">
+                    <div class="filters-row">
+                        <input type="text" id="search" placeholder="Søk etter fag...">
+                        <div class="filter-buttons">
+                            <button class="filter-btn active" data-category="all">Alle</button>
+                            <button class="filter-btn" data-category="realfag">Realfag</button>
+                            <button class="filter-btn" data-category="spraak">Språk</button>
+                            <button class="filter-btn" data-category="samfunnsfag">Samfunnsfag</button>
+                        </div>
+                    </div>
+                </div>
+                <div id="fag-grid" class="fag-grid">
+                    <p class="loading">Laster fag...</p>
+                </div>
+            </main>
+            <div id="modal" class="modal hidden">
+                <div class="modal-content">
+                    <button class="close-btn" aria-label="Lukk">&times;</button>
+                    <div id="modal-body"></div>
+                </div>
+            </div>
+        `;
+
+        // Last app.js
+        const script = document.createElement('script');
+        script.src = base + '/app.js?v=' + v;
+        document.body.appendChild(script);
+    })();
+    </script>
+
+</body>
+</html>
