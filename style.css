@@ -272,9 +272,9 @@
   height: 100%;
   background: rgba(0, 0, 0, 0.6);
   z-index: 10000;
-  align-items: flex-start;
+  align-items: center;
   justify-content: center;
-  padding: 40px 20px 20px 20px;
+  padding: 20px;
   overflow-y: auto;
   font-family: var(--fk-font-family);
 }
@@ -289,13 +289,14 @@
   padding: 40px;
   max-width: 800px;
   width: 100%;
-  max-height: 90vh;
+  max-height: 85vh;
   overflow-y: auto;
   overflow-x: hidden;
   position: relative;
   animation: fkModalSlideIn 0.3s ease;
   box-shadow: 0 10px 40px rgba(31, 71, 57, 0.2);
   border: 2px solid var(--fk-secondary-color);
+  margin: auto;
 }
 
 @keyframes fkModalSlideIn {
@@ -641,28 +642,23 @@
 
 @media (max-width: 480px) {
   #fagkatalog .modal {
-    padding: 0;
-    align-items: stretch;
+    padding: 10px;
+    align-items: center;
   }
 
   #fagkatalog .modal-content {
-    padding: max(60px, env(safe-area-inset-top, 60px))
-             max(20px, env(safe-area-inset-right, 20px))
-             max(20px, env(safe-area-inset-bottom, 20px))
-             max(20px, env(safe-area-inset-left, 20px));
-    margin: 0;
+    padding: 50px 20px 20px 20px;
+    margin: auto;
     width: 100%;
     max-width: 100%;
-    max-height: 100vh;
-    height: 100%;
-    border-radius: 0;
-    border: none;
+    max-height: 90vh;
+    border-radius: var(--fk-radius-md);
   }
 
   #fagkatalog .modal-hero {
     width: calc(100% + 40px);
-    margin: -60px -20px 24px -20px;
-    border-radius: 0;
+    margin: -50px -20px 24px -20px;
+    border-radius: var(--fk-radius-md) var(--fk-radius-md) 0 0;
   }
 
   #fagkatalog #modal-body h2 {

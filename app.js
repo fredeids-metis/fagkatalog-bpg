@@ -230,6 +230,12 @@ function openModal(fag) {
     modal.classList.remove('hidden');
     document.body.style.overflow = 'hidden';
 
+    // Hide chat widget when modal is open
+    const chatToggle = document.getElementById('chatToggle');
+    const chatWidget = document.getElementById('chatWidget');
+    if (chatToggle) chatToggle.style.display = 'none';
+    if (chatWidget) chatWidget.classList.remove('open');
+
     // Focus close button for accessibility
     modal.querySelector('.close-btn')?.focus();
 }
@@ -238,6 +244,10 @@ function closeModal() {
     const modal = document.getElementById('modal');
     modal.classList.add('hidden');
     document.body.style.overflow = '';
+
+    // Show chat toggle again when modal closes
+    const chatToggle = document.getElementById('chatToggle');
+    if (chatToggle) chatToggle.style.display = '';
 }
 
 function filterFag() {

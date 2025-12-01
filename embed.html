@@ -54,6 +54,40 @@
                 &lt;div id="modal-body"&gt;&lt;/div&gt;
             &lt;/div&gt;
         &lt;/div&gt;
+        &lt;button class="chat-toggle" id="chatToggle" aria-label="Åpne chat"&gt;
+            &lt;svg class="chat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"&gt;
+                &lt;path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/&gt;
+            &lt;/svg&gt;
+            &lt;svg class="close-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"&gt;
+                &lt;line x1="18" y1="6" x2="6" y2="18"/&gt;
+                &lt;line x1="6" y1="6" x2="18" y2="18"/&gt;
+            &lt;/svg&gt;
+        &lt;/button&gt;
+        &lt;div class="chat-widget" id="chatWidget"&gt;
+            &lt;div class="chat-widget-header"&gt;
+                &lt;div class="avatar"&gt;🎓&lt;/div&gt;
+                &lt;div class="header-text"&gt;
+                    &lt;h3&gt;Fagvalg-assistent&lt;/h3&gt;
+                    &lt;p&gt;Bergen Private Gymnas&lt;/p&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+            &lt;div class="chat-widget-messages" id="chatMessages"&gt;
+                &lt;div class="chat-message bot"&gt;
+                    Hei! Jeg kan hjelpe deg med spørsmål om programfag på BPG.
+                &lt;/div&gt;
+            &lt;/div&gt;
+            &lt;div class="chat-widget-notice"&gt;
+                ⚠️ Dummy-widget - Vil bli erstattet med ekte chatbot
+            &lt;/div&gt;
+            &lt;form class="chat-widget-input" id="chatForm"&gt;
+                &lt;input type="text" id="chatInput" placeholder="Skriv et spørsmål..." autocomplete="off"&gt;
+                &lt;button type="submit" aria-label="Send"&gt;
+                    &lt;svg viewBox="0 0 24 24" fill="currentColor"&gt;
+                        &lt;path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/&gt;
+                    &lt;/svg&gt;
+                &lt;/button&gt;
+            &lt;/form&gt;
+        &lt;/div&gt;
     `;
 
     // Last app.js
