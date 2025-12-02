@@ -1,6 +1,9 @@
 const API_BASE = 'https://fredeids-metis.github.io/school-data/api/2025-01';
 const IMAGE_BASE = 'https://fredeids-metis.github.io/school-data/images/fag';
 
+// Skole-ID for filtrering basert på aktivt blokkskjema
+const SCHOOL_ID = 'bergen-private-gymnas';
+
 let allFag = [];
 let currentFilter = 'all';
 
@@ -281,11 +284,14 @@ async function loadFag() {
     const grid = document.getElementById('fag-grid');
 
     try {
-        const response = await fetch(`${API_BASE}/curriculum/fag.json`);
+        // Hent skolens tilbudte fag (filtrert basert på aktivt blokkskjema)
+        const response = await fetch(`${API_BASE}/skoler/${SCHOOL_ID}/tilbudt-fag.json`);
         if (!response.ok) throw new Error('Kunne ikke laste fag');
 
         const data = await response.json();
         allFag = data.valgfrieProgramfag || [];
+
+        console.log(`Lastet ${allFag.length} fag for ${SCHOOL_ID} (blokkskjema: ${data.metadata?.blokkskjemaVersion})`);
 
         grid.innerHTML = '';
 
