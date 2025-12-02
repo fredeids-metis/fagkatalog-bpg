@@ -61,6 +61,43 @@ function renderAccordion(id, title, content, count = null) {
 }
 
 // Extract kompetansemal from beskrivelseHTML (matches studieplanlegger)
+/**
+ * Formaterer ren tekst til lesevennlig HTML med paragrafoppdeling.
+ * Splitter teksten på naturlige steder (etter punktum etterfulgt av stor bokstav).
+ */
+function formatTextContent(text) {
+    if (!text) return '<p class="placeholder-text">Innhold kommer snart</p>';
+
+    // Split på punktum etterfulgt av mellomrom og stor bokstav (ny setning)
+    const sentences = text.match(/[^.!?]+[.!?]+\s*/g) || [text];
+
+    // Grupper setninger i paragrafer (ca. 2-3 setninger per paragraf)
+    const paragraphs = [];
+    let currentPara = [];
+
+    sentences.forEach((sentence, i) => {
+        currentPara.push(sentence.trim());
+        // Ny paragraf etter hver 2-3 setninger, eller ved naturlige brudd
+        if (currentPara.length >= 2 && (
+            sentence.includes('viktig') ||
+            sentence.includes('også') ||
+            sentence.includes('I tillegg') ||
+            i === sentences.length - 1 ||
+            currentPara.length >= 3
+        )) {
+            paragraphs.push(currentPara.join(' '));
+            currentPara = [];
+        }
+    });
+
+    // Legg til eventuelle gjenværende setninger
+    if (currentPara.length > 0) {
+        paragraphs.push(currentPara.join(' '));
+    }
+
+    return paragraphs.map(p => `<p>${p}</p>`).join('');
+}
+
 function extractKompetansemal(beskrivelseHTML) {
     if (!beskrivelseHTML) return { html: null, count: 0 };
 
@@ -177,14 +214,10 @@ function openModal(fag) {
         </div>`;
 
     // Accordion 1: Hvordan arbeider man i faget
-    const hvordanHTML = fag.hvordanArbeiderMan
-        ? `<p>${fag.hvordanArbeiderMan}</p>`
-        : '<p class="placeholder-text">Innhold kommer snart</p>';
+    const hvordanHTML = formatTextContent(fag.hvordanArbeiderMan);
 
     // Accordion 2: Fagets relevans
-    const relevansHTML = fag.fagetsRelevans
-        ? `<p>${fag.fagetsRelevans}</p>`
-        : '<p class="placeholder-text">Innhold kommer snart</p>';
+    const relevansHTML = formatTextContent(fag.fagetsRelevans);
 
     // Accordion 3: I dette faget lærer du å ... (kompetansemål)
     const kompetanse = extractKompetansemal(fag.beskrivelseHTML);

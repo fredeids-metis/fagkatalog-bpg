@@ -514,9 +514,14 @@
 }
 
 #fagkatalog .fag-accordion .accordion-content p {
-  margin: 0;
-  line-height: 1.7;
-  color: #555;
+  margin: 0 0 1em 0;
+  line-height: 1.8;
+  color: #444;
+  max-width: 65ch;
+}
+
+#fagkatalog .fag-accordion .accordion-content p:last-child {
+  margin-bottom: 0;
 }
 
 #fagkatalog .fag-accordion .accordion-content ul {
