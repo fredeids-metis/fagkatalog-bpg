@@ -317,14 +317,14 @@ async function loadFag() {
     const grid = document.getElementById('fag-grid');
 
     try {
-        // Hent skolens tilbudte fag (filtrert basert på aktivt blokkskjema)
-        const response = await fetch(`${API_BASE}/skoler/${SCHOOL_ID}/tilbudt-fag.json`);
+        // Hent skolens tilbudte fag (fra tilbud.yml)
+        const response = await fetch(`${API_BASE}/skoler/${SCHOOL_ID}/tilbud.json`);
         if (!response.ok) throw new Error('Kunne ikke laste fag');
 
         const data = await response.json();
         allFag = data.valgfrieProgramfag || [];
 
-        console.log(`Lastet ${allFag.length} fag for ${SCHOOL_ID} (blokkskjema: ${data.metadata?.blokkskjemaVersion})`);
+        console.log(`Lastet ${allFag.length} fag for ${SCHOOL_ID} (kilde: ${data.metadata?.source})`);
 
         grid.innerHTML = '';
 
