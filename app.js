@@ -7,8 +7,15 @@ const SCHOOL_ID = 'bergen-private-gymnas';
 let allFag = [];
 let currentFilter = 'all';
 
-// Kategorisering basert på fagkode-prefix
-function getCategory(fagkode) {
+// Kategorisering basert på kategori-felt fra API (med fallback til fagkode-prefix)
+function getCategory(fag) {
+    // Bruk kategori fra API hvis tilgjengelig
+    if (fag.kategori) {
+        return fag.kategori;
+    }
+
+    // Fallback til fagkode-prefix
+    const fagkode = fag.fagkode;
     if (!fagkode) return 'annet';
     const prefix = fagkode.substring(0, 3).toUpperCase();
 
@@ -26,9 +33,17 @@ function getCategory(fagkode) {
 
 function getCategoryLabel(category) {
     const labels = {
+        'matematikk': 'Matematikk',
+        'naturfag': 'Naturfag',
         'realfag': 'Realfag',
         'spraak': 'Språk',
+        'språk': 'Språk',
         'samfunnsfag': 'Samfunnsfag',
+        'økonomi': 'Økonomi',
+        'bedriftsledelse': 'Bedriftsledelse',
+        'teknologi': 'Teknologi',
+        'kunst': 'Kunst',
+        'musikk': 'Musikk',
         'annet': 'Annet'
     };
     return labels[category] || category;
@@ -139,7 +154,7 @@ function setupAccordionHandlers(container) {
 }
 
 function createFagCard(fag) {
-    const category = getCategory(fag.fagkode);
+    const category = getCategory(fag);
     const card = document.createElement('article');
     card.className = 'fag-card';
     card.dataset.category = category;
