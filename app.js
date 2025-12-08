@@ -7,26 +7,32 @@ const SCHOOL_ID = 'bergen-private-gymnas';
 let allFag = [];
 let currentFilter = 'all';
 
-// Kategorisering basert på kategori-felt fra API (med fallback til fagkode-prefix)
-function getCategory(fag) {
-    // Bruk kategori fra API hvis tilgjengelig
-    if (fag.kategori) {
-        return fag.kategori;
-    }
+// Kategorisering for filtrering
+// Mapper API-kategorier til filterkategorier: matematikk, realfag, språk, samfunn
+function getFilterCategory(fag) {
+    const kategori = fag.kategori;
 
-    // Fallback til fagkode-prefix
+    // Matematikk er et spesifikt krav - egen kategori
+    if (kategori === 'matematikk') return 'matematikk';
+
+    // Realfag: naturfag, teknologi
+    if (['naturfag', 'teknologi'].includes(kategori)) return 'realfag';
+
+    // Språk
+    if (kategori === 'språk') return 'språk';
+
+    // Samfunn/Økonomi: samfunnsfag, økonomi, bedriftsledelse
+    if (['samfunnsfag', 'økonomi', 'bedriftsledelse'].includes(kategori)) return 'samfunn';
+
+    // Fallback til fagkode-prefix for fag uten kategori
     const fagkode = fag.fagkode;
     if (!fagkode) return 'annet';
     const prefix = fagkode.substring(0, 3).toUpperCase();
 
-    // Realfag
+    if (prefix === 'MAT') return 'matematikk';
     if (['REA', 'INF'].includes(prefix)) return 'realfag';
-
-    // Språk
-    if (['SPR', 'ENG', 'FSP'].includes(prefix)) return 'spraak';
-
-    // Samfunnsfag og okonomi
-    if (['SAM', 'SAK', 'HIS', 'GEO', 'PSY', 'SOS', 'REL', 'MAR', 'ENT', 'MED', 'KOM', 'LED'].includes(prefix)) return 'samfunnsfag';
+    if (['SPR', 'ENG', 'FSP'].includes(prefix)) return 'språk';
+    if (['SAM', 'SAK', 'HIS', 'GEO', 'PSY', 'SOS', 'REL', 'MAR', 'ENT', 'MED', 'KOM', 'LED'].includes(prefix)) return 'samfunn';
 
     return 'annet';
 }
@@ -154,7 +160,7 @@ function setupAccordionHandlers(container) {
 }
 
 function createFagCard(fag) {
-    const category = getCategory(fag);
+    const category = getFilterCategory(fag);
     const card = document.createElement('article');
     card.className = 'fag-card';
     card.dataset.category = category;
@@ -178,7 +184,6 @@ function createFagCard(fag) {
             <h2>${fag.title}</h2>
             <span class="fagkode">${fag.fagkode || 'Ukjent'}</span>
             <p class="description">${description}</p>
-            <span class="category-tag ${category}">${getCategoryLabel(category)}</span>
         </div>
     `;
 
