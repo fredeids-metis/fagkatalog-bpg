@@ -1,0 +1,29 @@
+/**
+ * Bergen Private Gymnas - Theme
+ * Green color palette
+ */
+
+#fagkatalog {
+  /* Primary colors */
+  --fk-primary-color: #1F4739;
+  --fk-primary-hover: #163529;
+  --fk-secondary-color: #E8F5A3;
+
+  /* RGB values for rgba() usage */
+  --fk-primary-rgb: 31, 71, 57;
+  --fk-secondary-rgb: 232, 245, 163;
+
+  /* Image overlay - green tint on card images */
+  --fk-image-overlay-opacity: 0.15;
+
+  /* Shadows with theme color */
+  --fk-shadow-lg: 0 8px 20px rgba(31, 71, 57, 0.15);
+  --fk-shadow-primary: 0 4px 12px rgba(31, 71, 57, 0.3);
+  --fk-shadow-primary-hover: 0 6px 20px rgba(31, 71, 57, 0.4);
+
+  /* Card image fallback gradient */
+  --fk-card-gradient: linear-gradient(135deg, #2a5a4a 0%, #4a7a6a 100%);
+
+  /* Modal hero gradient (no image) */
+  --fk-hero-gradient: linear-gradient(135deg, #1F4739 0%, #2a5a4a 100%);
+}

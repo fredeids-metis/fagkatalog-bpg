@@ -1,13 +1,28 @@
 /**
- * Fagkatalog - BPG Style (Scoped for embedding)
+ * Fagkatalog - Base Styles (Scoped for embedding)
  * All styles scoped to #fagkatalog to avoid conflicts
+ *
+ * Theme colors are loaded from separate theme files:
+ * - themes/bergen-private-gymnas.css (green)
+ * - themes/metis-vgs.css (red)
  */
 
 /* === CSS Variables (scoped to #fagkatalog) === */
 #fagkatalog {
+  /* Theme colors - these are overridden by theme files */
+  /* Fallback to BPG colors if no theme loaded */
   --fk-primary-color: #1F4739;
   --fk-primary-hover: #163529;
   --fk-secondary-color: #E8F5A3;
+  --fk-primary-rgb: 31, 71, 57;
+  --fk-secondary-rgb: 232, 245, 163;
+  --fk-shadow-lg: 0 8px 20px rgba(var(--fk-primary-rgb), 0.15);
+  --fk-shadow-primary: 0 4px 12px rgba(var(--fk-primary-rgb), 0.3);
+  --fk-shadow-primary-hover: 0 6px 20px rgba(var(--fk-primary-rgb), 0.4);
+  --fk-card-gradient: linear-gradient(135deg, #2a5a4a 0%, #4a7a6a 100%);
+  --fk-hero-gradient: linear-gradient(135deg, #1F4739 0%, #2a5a4a 100%);
+
+  /* Non-theme colors (same for all schools) */
   --fk-text-dark: #000000;
   --fk-text-medium: #737373;
   --fk-text-light: #666666;
@@ -15,7 +30,6 @@
   --fk-background-light: #FAFAFA;
   --fk-shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
   --fk-shadow-md: 0 2px 8px rgba(0, 0, 0, 0.06);
-  --fk-shadow-lg: 0 8px 20px rgba(31, 71, 57, 0.15);
   --fk-font-family: helvetica, arial, sans-serif;
   --fk-radius-sm: 8px;
   --fk-radius-md: 12px;
@@ -85,7 +99,7 @@
 #fagkatalog #search:focus {
   outline: none;
   border-color: var(--fk-primary-color);
-  box-shadow: 0 0 0 3px rgba(31, 71, 57, 0.1);
+  box-shadow: 0 0 0 3px rgba(var(--fk-primary-rgb), 0.1);
   background: white;
 }
 
@@ -113,7 +127,7 @@
 #fagkatalog .filter-btn:hover {
   border-color: var(--fk-primary-color);
   color: var(--fk-primary-color);
-  background: rgba(31, 71, 57, 0.04);
+  background: rgba(var(--fk-primary-rgb), 0.04);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
   transform: translateY(-1px);
 }
@@ -122,7 +136,7 @@
   background: var(--fk-primary-color);
   border-color: var(--fk-primary-color);
   color: white;
-  box-shadow: 0 2px 6px rgba(31, 71, 57, 0.25);
+  box-shadow: 0 2px 6px rgba(var(--fk-primary-rgb), 0.25);
   font-weight: 600;
 }
 
@@ -146,7 +160,7 @@
 
 #fagkatalog .fag-card:hover {
   border-color: var(--fk-primary-color);
-  box-shadow: 0 4px 16px rgba(31, 71, 57, 0.15), 0 2px 8px rgba(31, 71, 57, 0.08);
+  box-shadow: 0 4px 16px rgba(var(--fk-primary-rgb), 0.15), 0 2px 8px rgba(var(--fk-primary-rgb), 0.08);
   transform: translateY(-4px);
 }
 
@@ -154,14 +168,14 @@
 #fagkatalog .fag-card:focus-visible {
   outline: none;
   border-color: var(--fk-primary-color);
-  box-shadow: 0 0 0 3px rgba(31, 71, 57, 0.15), 0 4px 12px rgba(31, 71, 57, 0.15);
+  box-shadow: 0 0 0 3px rgba(var(--fk-primary-rgb), 0.15), 0 4px 12px rgba(var(--fk-primary-rgb), 0.15);
 }
 
 /* Card image */
 #fagkatalog .fag-card-image {
   height: 120px;
   overflow: hidden;
-  background: linear-gradient(135deg, #2a5a4a 0%, #4a7a6a 100%);
+  background: var(--fk-card-gradient);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -174,6 +188,30 @@
   object-fit: cover;
   opacity: 0;
   animation: fkFadeIn 0.3s ease forwards;
+  filter: grayscale(100%);
+  transition: filter 0.3s ease;
+}
+
+#fagkatalog .fag-card:hover .fag-card-image img {
+  filter: grayscale(50%);
+}
+
+/* Color overlay on card images - creates unified color tone per school */
+#fagkatalog .fag-card-image::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(var(--fk-primary-rgb), var(--fk-image-overlay-opacity, 0.15));
+  mix-blend-mode: multiply;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+#fagkatalog .fag-card:hover .fag-card-image::after {
+  opacity: 0.7;
 }
 
 @keyframes fkFadeIn {
@@ -334,7 +372,7 @@
   overflow-x: hidden;
   position: relative;
   animation: fkModalSlideIn 0.3s ease;
-  box-shadow: 0 10px 40px rgba(31, 71, 57, 0.2);
+  box-shadow: 0 10px 40px rgba(var(--fk-primary-rgb), 0.2);
   border: 2px solid var(--fk-secondary-color);
   margin: auto;
 }
@@ -430,7 +468,7 @@
 }
 
 #fagkatalog .modal-hero-content .fagkode-badge {
-  background: rgba(232, 245, 163, 0.95);
+  background: rgba(var(--fk-secondary-rgb), 0.95);
   color: var(--fk-primary-color);
   padding: 6px 14px;
   border-radius: 8px;
@@ -455,7 +493,7 @@
 /* Hero fallback (no image) */
 #fagkatalog .modal-hero.no-image {
   height: auto;
-  background: linear-gradient(135deg, var(--fk-primary-color) 0%, #2a5a4a 100%);
+  background: var(--fk-hero-gradient);
   padding: 30px;
 }
 
@@ -503,7 +541,7 @@
 #fagkatalog .fag-accordion {
   border-radius: 12px;
   overflow: hidden;
-  background: rgba(232, 245, 163, 0.15);
+  background: rgba(var(--fk-secondary-rgb), 0.15);
   border: 2px solid var(--fk-secondary-color);
   transition: all 0.3s ease;
 }
@@ -513,14 +551,14 @@
   justify-content: space-between;
   align-items: center;
   padding: 16px 20px;
-  background: rgba(232, 245, 163, 0.3);
+  background: rgba(var(--fk-secondary-rgb), 0.3);
   cursor: pointer;
   transition: background 0.3s ease;
   user-select: none;
 }
 
 #fagkatalog .fag-accordion .accordion-header:hover {
-  background: rgba(232, 245, 163, 0.5);
+  background: rgba(var(--fk-secondary-rgb), 0.5);
 }
 
 #fagkatalog .fag-accordion .accordion-header h3 {
@@ -549,7 +587,7 @@
   max-height: 0;
   overflow: hidden;
   transition: max-height 0.4s ease, padding 0.3s ease;
-  background: rgba(232, 245, 163, 0.08);
+  background: rgba(var(--fk-secondary-rgb), 0.08);
   padding: 0 20px;
 }
 
@@ -631,13 +669,13 @@
   border-radius: var(--fk-radius-md);
   font-weight: 600;
   transition: all var(--fk-transition-normal);
-  box-shadow: 0 3px 8px rgba(31, 71, 57, 0.3);
+  box-shadow: 0 3px 8px rgba(var(--fk-primary-rgb), 0.3);
 }
 
 #fagkatalog .btn-lareplan:hover {
   background: var(--fk-primary-hover);
   transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(31, 71, 57, 0.4);
+  box-shadow: 0 6px 16px rgba(var(--fk-primary-rgb), 0.4);
   color: white;
   text-decoration: none;
 }
@@ -758,7 +796,7 @@
   color: white;
   border: none;
   cursor: pointer;
-  box-shadow: 0 4px 12px rgba(31, 71, 57, 0.3);
+  box-shadow: 0 4px 12px rgba(var(--fk-primary-rgb), 0.3);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -768,7 +806,7 @@
 
 #fagkatalog .chat-toggle:hover {
   transform: scale(1.1);
-  box-shadow: 0 6px 20px rgba(31, 71, 57, 0.4);
+  box-shadow: 0 6px 20px rgba(var(--fk-primary-rgb), 0.4);
 }
 
 #fagkatalog .chat-toggle svg {
@@ -799,7 +837,7 @@
   max-height: calc(100vh - 140px);
   background: white;
   border-radius: 16px;
-  box-shadow: 0 8px 30px rgba(31, 71, 57, 0.2);
+  box-shadow: 0 8px 30px rgba(var(--fk-primary-rgb), 0.2);
   display: none;
   flex-direction: column;
   overflow: hidden;
@@ -963,7 +1001,7 @@
 /* Dummy notice */
 #fagkatalog .chat-widget-notice {
   padding: 8px 16px;
-  background: rgba(232, 245, 163, 0.5);
+  background: rgba(var(--fk-secondary-rgb), 0.5);
   font-size: 0.75rem;
   color: var(--fk-primary-color);
   text-align: center;

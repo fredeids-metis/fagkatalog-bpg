@@ -1,0 +1,34 @@
+/**
+ * Metis Videregående Skole - Theme
+ * Red color palette (from Squarespace)
+ *
+ * Source colors:
+ * --lightAccent-hsl: 355.18, 85.41%, 54.31% = #EE2737 (primary red)
+ * --darkAccent-hsl: 357.23, 86.67%, 85.29% = #FAB9BC (light pink)
+ * --white-hsl: 240, 11.11%, 96.47% = #F4F4F6 (off-white background)
+ */
+
+#fagkatalog {
+  /* Primary colors */
+  --fk-primary-color: #EE2737;
+  --fk-primary-hover: #C41E2D;
+  --fk-secondary-color: #FAB9BC;
+
+  /* RGB values for rgba() usage */
+  --fk-primary-rgb: 238, 39, 55;
+  --fk-secondary-rgb: 250, 185, 188;
+
+  /* Image overlay - red tint on card images */
+  --fk-image-overlay-opacity: 0.2;
+
+  /* Shadows with theme color */
+  --fk-shadow-lg: 0 8px 20px rgba(238, 39, 55, 0.15);
+  --fk-shadow-primary: 0 4px 12px rgba(238, 39, 55, 0.3);
+  --fk-shadow-primary-hover: 0 6px 20px rgba(238, 39, 55, 0.4);
+
+  /* Card image fallback gradient */
+  --fk-card-gradient: linear-gradient(135deg, #EE2737 0%, #C41E2D 100%);
+
+  /* Modal hero gradient (no image) */
+  --fk-hero-gradient: linear-gradient(135deg, #EE2737 0%, #D42535 100%);
+}

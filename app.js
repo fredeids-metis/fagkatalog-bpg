@@ -1,8 +1,9 @@
 const API_BASE = 'https://fredeids-metis.github.io/school-data/api/2025-01';
 const IMAGE_BASE = 'https://fredeids-metis.github.io/school-data/images/fag';
 
-// Skole-ID for filtrering basert på aktivt blokkskjema
-const SCHOOL_ID = 'bergen-private-gymnas';
+// Skole-ID leses fra data-school attributt på containeren (default: bergen-private-gymnas)
+const container = document.getElementById('fagkatalog');
+const SCHOOL_ID = container?.dataset.school || 'bergen-private-gymnas';
 
 let allFag = [];
 let currentFilter = 'all';
