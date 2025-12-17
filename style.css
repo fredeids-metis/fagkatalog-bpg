@@ -49,6 +49,12 @@
   background: var(--fk-background-light);
   border-radius: var(--fk-radius-lg);
   padding: var(--fk-spacing-lg);
+
+  /* Ensure full width in embedded contexts */
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  box-sizing: border-box;
 }
 
 /* Reset only within #fagkatalog */
